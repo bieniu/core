@@ -13,7 +13,7 @@ from homeassistant.components.humidifier.const import (
     DEVICE_CLASS_HUMIDIFIER,
     SUPPORT_MODES,
 )
-from homeassistant.const import ATTR_MODE, CONF_HOST, CONF_TOKEN
+from homeassistant.const import ATTR_MODE
 from homeassistant.core import callback
 from homeassistant.util.percentage import percentage_to_ranged_value
 
@@ -48,14 +48,10 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         return
 
     entities = []
-    host = config_entry.data[CONF_HOST]
-    token = config_entry.data[CONF_TOKEN]
     name = config_entry.title
     model = config_entry.data[CONF_MODEL]
     unique_id = config_entry.unique_id
     coordinator = hass.data[DOMAIN][config_entry.entry_id][KEY_COORDINATOR]
-
-    _LOGGER.debug("Initializing with host %s (token %s...)", host, token[:5])
 
     if model in MODELS_HUMIDIFIER_MIOT:
         air_humidifier = hass.data[DOMAIN][config_entry.entry_id][KEY_DEVICE]

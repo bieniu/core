@@ -101,6 +101,7 @@ async def async_create_miio_device_and_coordinator(
     device = None
     if model not in MODELS_HUMIDIFIER:
         return
+    _LOGGER.debug("Initializing with host %s (token %s...)", host, token[:5])
     if model in MODELS_HUMIDIFIER_MIOT:
         device = AirHumidifierMiot(host, token)
     else:
